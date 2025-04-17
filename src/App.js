@@ -1,3 +1,4 @@
+import {v4 as uuidv4} from 'uuid'
 import {Component} from 'react'
 
 import ContactItem from './components/ContactItem'
@@ -6,19 +7,19 @@ import './App.css'
 
 const initialContactsList = [
   {
-    id: 1,
+    id: uuidv4(),
     name: 'Ram',
     mobileNo: 9999988888,
     isFavorite: false,
   },
   {
-    id: 2,
+    id: uuidv4(),
     name: 'Pavan',
     mobileNo: 8888866666,
     isFavorite: true,
   },
   {
-    id: 3,
+    id: uuidv4(),
     name: 'Nikhil',
     mobileNo: 9999955555,
     isFavorite: false,
@@ -34,6 +35,19 @@ class App extends Component {
 
   onAddContact = event => {
     event.preventDefault()
+    const {name, mobileNo} = this.state
+    const newContact = {
+      id: uuidv4(),
+      name,
+      mobileNo,
+      isFavorite: false,
+    }
+
+    this.setState(prevState => ({
+      contactsList: [...prevState.contactsList, newContact],
+      name: '',
+      mobileNo: '',
+    }))
   }
 
   onChangeMobileNo = event => {
